@@ -13,7 +13,7 @@ public class Order {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @Column(name = "number")
-  private String number;
+  private Long number;
   @Column(name = "creation_dt")
   private Date creationDate;
   @Column(name = "description")

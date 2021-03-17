@@ -27,12 +27,12 @@ public class OrderController {
   }
 
   @PostMapping
-  public ResponseEntity<?> createOrder(Order order){
-    Order createdOrder = orderService.saveOrder(order);
+  public ResponseEntity<?> createOrder(@RequestBody Order order, @RequestParam Long orderOwner){
+    Order createdOrder = orderService.saveOrder(order, orderOwner);
     return new ResponseEntity<>(createdOrder, HttpStatus.OK);
   }
   @GetMapping("/get/{id}")
-  public ResponseEntity<?> getUserById(@PathVariable Long id) {
+  public ResponseEntity<?> getOrderById(@PathVariable Long id) {
     Order order = orderService.findById(id);
     return new ResponseEntity<>(order, HttpStatus.OK);
   }

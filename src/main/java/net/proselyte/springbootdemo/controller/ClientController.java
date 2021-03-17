@@ -28,7 +28,7 @@ public class ClientController {
   }
 
   @PostMapping
-  public ResponseEntity<?> createClient(Client client){
+  public ResponseEntity<?> createClient(@RequestBody Client client){
    Client createdClient = clientService.saveClient(client);
     return new ResponseEntity<>(createdClient, HttpStatus.OK);
   }
@@ -38,7 +38,7 @@ public class ClientController {
     return new ResponseEntity<>(client, HttpStatus.OK);
   }
 
-  @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  @PutMapping(value = "/update/{id}")
   public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ClientDto updateClient) {
     Client updatedClient = clientService.updateClient(id, updateClient);
     return new ResponseEntity<>(updatedClient, HttpStatus.OK);
