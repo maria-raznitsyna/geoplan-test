@@ -1,9 +1,9 @@
-package net.proselyte.springbootdemo.controller;
+package net.springbootdemo.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import net.proselyte.springbootdemo.dto.ClientDto;
-import net.proselyte.springbootdemo.model.Client;
-import net.proselyte.springbootdemo.service.ClientService;
+import net.springbootdemo.dto.ClientDto;
+import net.springbootdemo.model.Client;
+import net.springbootdemo.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +57,7 @@ public class ClientController {
     if (client == null) {
       return ResponseEntity.notFound().build();
     }
-    clientService.deleteById(id);
+    clientService.deleteByIdWithAllOrders(id);
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 }

@@ -1,7 +1,7 @@
-package net.proselyte.springbootdemo.dto;
+package net.springbootdemo.dto;
 
 import lombok.*;
-import net.proselyte.springbootdemo.model.Address;
+import net.springbootdemo.model.Address;
 
 @NoArgsConstructor
 @AllArgsConstructor

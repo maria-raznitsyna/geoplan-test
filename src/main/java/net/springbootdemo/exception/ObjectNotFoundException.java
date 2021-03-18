@@ -1,4 +1,4 @@
-package net.proselyte.springbootdemo.exception;
+package net.springbootdemo.exception;
 
 import java.util.function.Supplier;
 

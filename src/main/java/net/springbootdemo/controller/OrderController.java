@@ -1,9 +1,9 @@
-package net.proselyte.springbootdemo.controller;
+package net.springbootdemo.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import net.proselyte.springbootdemo.dto.OrderDto;
-import net.proselyte.springbootdemo.model.Order;
-import net.proselyte.springbootdemo.service.OrderService;
+import net.springbootdemo.dto.OrderDto;
+import net.springbootdemo.model.Order;
+import net.springbootdemo.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,23 +21,33 @@ public class OrderController {
   }
 
   @GetMapping
-  public ResponseEntity<?> findAll(){
+  public ResponseEntity<?> findAll() {
     List<Order> orders = orderService.findAll();
     return new ResponseEntity<>(orders, HttpStatus.OK);
   }
 
   @PostMapping
-  public ResponseEntity<?> createOrder(@RequestBody Order order, @RequestParam Long orderOwner){
+  public ResponseEntity<?> createOrder(@RequestBody Order order, @RequestParam Long orderOwner) {
     Order createdOrder = orderService.saveOrder(order, orderOwner);
     return new ResponseEntity<>(createdOrder, HttpStatus.OK);
   }
-  @GetMapping("/get/{id}")
+
+  @GetMapping("/{id}")
   public ResponseEntity<?> getOrderById(@PathVariable Long id) {
     Order order = orderService.findById(id);
     if (order == null) {
       return ResponseEntity.notFound().build();
     }
     return new ResponseEntity<>(order, HttpStatus.OK);
+  }
+
+  @GetMapping("/byclient")
+  public ResponseEntity<?> getOrderByClientId(@RequestParam Long clientId) {
+    List<Order> orders = orderService.findAllByClients(clientId);
+    if (orders == null) {
+      return ResponseEntity.notFound().build();
+    }
+    return new ResponseEntity<>(orders, HttpStatus.OK);
   }
 
   @PutMapping("/update/{id}")
@@ -52,10 +62,7 @@ public class OrderController {
 
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<?> delete(@PathVariable Long id) {
-   Order order = orderService.findById(id);
-    if (order == null) {
-      return ResponseEntity.notFound().build();
-    }
+    Order order = orderService.findById(id);
     orderService.deleteById(id);
     return ResponseEntity.status(HttpStatus.OK).build();
   }

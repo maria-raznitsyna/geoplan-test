@@ -1,14 +1,17 @@
-package net.proselyte.springbootdemo.service;
+package net.springbootdemo.service;
 
-import net.proselyte.springbootdemo.dto.ClientDto;
-import net.proselyte.springbootdemo.model.Client;
-import net.proselyte.springbootdemo.repository.ClientRepository;
-import net.proselyte.springbootdemo.repository.OrderRepository;
+import net.springbootdemo.dto.ClientDto;
+import net.springbootdemo.model.Client;
+import net.springbootdemo.repository.ClientRepository;
+import net.springbootdemo.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static net.springbootdemo.exception.ObjectNotFoundException.objectNotFoundExSupplier;
 
 @Service
 public class ClientService {
@@ -22,7 +25,7 @@ public class ClientService {
   }
 
   public Client findById(Long id) {
-    return clientRepository.findById(id).get();
+    return clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
   }
 
   public List<Client> findAll() {
@@ -57,7 +60,10 @@ public class ClientService {
     return null;
   }
 
-  public void deleteById(Long id) {
+  @Transactional
+  public void deleteByIdWithAllOrders(Long id) {
+    Client client = clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
+    orderRepository.deleteAllByClient(client);
     clientRepository.deleteById(id);
   }
 }

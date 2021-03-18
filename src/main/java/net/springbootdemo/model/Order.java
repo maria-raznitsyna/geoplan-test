@@ -1,4 +1,4 @@
-package net.proselyte.springbootdemo.model;
+package net.springbootdemo.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

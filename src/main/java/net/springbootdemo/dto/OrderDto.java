@@ -1,4 +1,4 @@
-package net.proselyte.springbootdemo.dto;
+package net.springbootdemo.dto;
 
 import lombok.*;
 

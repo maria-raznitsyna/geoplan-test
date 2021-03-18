@@ -1,4 +1,4 @@
-package net.proselyte.springbootdemo.exception;
+package net.springbootdemo.exception;
 
 /**
  * @author val.rudi

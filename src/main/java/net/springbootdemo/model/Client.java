@@ -1,10 +1,8 @@
-package net.proselyte.springbootdemo.model;
+package net.springbootdemo.model;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,14 +28,6 @@ public class Client {
   private String phoneNumber;
 
   @OneToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "client_address", referencedColumnName = "ID")
   private Address address;
-
-  @OneToMany(
-    fetch = FetchType.EAGER,
-    mappedBy = "client",
-    orphanRemoval = true
-  )
-  private Set<Order> orders = new HashSet<>();
 }
 

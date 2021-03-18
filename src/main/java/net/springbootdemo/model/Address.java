@@ -1,9 +1,15 @@
-package net.proselyte.springbootdemo.model;
+package net.springbootdemo.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(of = {"id"}, callSuper = false)
+@ToString
 @Data
 @Entity
 @Table(name = "address")
@@ -18,5 +24,8 @@ public class Address {
   Integer houseNumber;
   Integer corpsNumber;
   Integer officeNumber;
+
+  @OneToOne(fetch = FetchType.EAGER)
+  Client client;
 
 }

@@ -1,16 +1,15 @@
-package net.proselyte.springbootdemo.service;
+package net.springbootdemo.service;
 
-import net.proselyte.springbootdemo.dto.OrderDto;
-import net.proselyte.springbootdemo.model.Client;
-import net.proselyte.springbootdemo.model.Order;
-import net.proselyte.springbootdemo.repository.ClientRepository;
-import net.proselyte.springbootdemo.repository.OrderRepository;
+import net.springbootdemo.dto.OrderDto;
+import net.springbootdemo.model.Client;
+import net.springbootdemo.model.Order;
+import net.springbootdemo.repository.ClientRepository;
+import net.springbootdemo.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-import static net.proselyte.springbootdemo.exception.ObjectNotFoundException.objectNotFoundExSupplier;
+import static net.springbootdemo.exception.ObjectNotFoundException.objectNotFoundExSupplier;
 
 @Service
 public class OrderService {
