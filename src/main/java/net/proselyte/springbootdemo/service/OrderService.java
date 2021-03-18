@@ -10,41 +10,46 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static net.proselyte.springbootdemo.exception.ObjectNotFoundException.objectNotFoundExSupplier;
+
 @Service
 public class OrderService {
   private final OrderRepository orderRepository;
   private final ClientRepository clientRepository;
 
-  public OrderService(OrderRepository clientRepository, ClientRepository clientRepository1) {
-    this.orderRepository = clientRepository;
-    this.clientRepository = clientRepository1;
+  public OrderService(OrderRepository orderRepository, ClientRepository clientRepository) {
+    this.orderRepository = orderRepository;
+    this.clientRepository = clientRepository;
   }
 
   public Order findById(Long id) {
-    return orderRepository.getOne(id);
+    return orderRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Order.class, id));
   }
 
   public List<Order> findAll() {
     return orderRepository.findAll();
   }
 
+  public List<Order> findAllByClients(Long clientId) {
+    Client client = clientRepository.findById(clientId).orElseThrow(objectNotFoundExSupplier(Client.class, clientId));
+
+    return orderRepository.findAllByClient(client);
+  }
+
   public Order saveOrder(Order order, Long ownerId) {
-    Client owner = clientRepository.findById(ownerId).get();
+    Client owner = clientRepository.findById(ownerId).orElseThrow(objectNotFoundExSupplier(Client.class, ownerId));
     order.setClient(owner);
     return orderRepository.save(order);
   }
 
-  public void deleteById(Long id) {
-    orderRepository.deleteById(id);
-  }
 
   public Order updateOrder(Long id, OrderDto updateDto) {
-    Optional<Order> dbVersion = orderRepository.findById(id);
-    if (dbVersion.isPresent()) {
-      Order orderFromDb = dbVersion.get();
+    Order dbVersion = orderRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Order.class, id));
 
-      return orderRepository.save(orderFromDb);
-    }
-    return null;
+      return orderRepository.save(dbVersion);
+  }
+
+  public void deleteById(Long id) {
+    orderRepository.deleteById(id);
   }
 }

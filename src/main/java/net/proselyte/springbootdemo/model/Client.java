@@ -1,11 +1,17 @@
 package net.proselyte.springbootdemo.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(of = {"id"}, callSuper = false)
+@ToString(callSuper = true)
 @Data
 @Entity
 @Table(name = "clients")

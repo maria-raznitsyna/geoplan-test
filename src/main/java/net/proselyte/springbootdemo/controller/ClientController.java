@@ -5,7 +5,6 @@ import net.proselyte.springbootdemo.dto.ClientDto;
 import net.proselyte.springbootdemo.model.Client;
 import net.proselyte.springbootdemo.service.ClientService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,30 +21,42 @@ public class ClientController {
   }
 
   @GetMapping
-  public ResponseEntity<?> findAll(){
+  public ResponseEntity<?> findAll() {
     List<Client> clients = clientService.findAll();
     return new ResponseEntity<>(clients, HttpStatus.OK);
   }
 
   @PostMapping
-  public ResponseEntity<?> createClient(@RequestBody Client client){
-   Client createdClient = clientService.saveClient(client);
+  public ResponseEntity<?> createClient(@RequestBody Client client) {
+    Client createdClient = clientService.saveClient(client);
     return new ResponseEntity<>(createdClient, HttpStatus.OK);
   }
+
   @GetMapping("/get/{id}")
   public ResponseEntity<?> getUserById(@PathVariable Long id) {
     Client client = clientService.findById(id);
+    if (client == null) {
+      return ResponseEntity.notFound().build();
+    }
     return new ResponseEntity<>(client, HttpStatus.OK);
   }
 
   @PutMapping(value = "/update/{id}")
   public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ClientDto updateClient) {
+    Client client = clientService.findById(id);
+    if (client == null) {
+      return ResponseEntity.notFound().build();
+    }
     Client updatedClient = clientService.updateClient(id, updateClient);
     return new ResponseEntity<>(updatedClient, HttpStatus.OK);
   }
 
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<?> delete(@PathVariable Long id) {
+    Client client = clientService.findById(id);
+    if (client == null) {
+      return ResponseEntity.notFound().build();
+    }
     clientService.deleteById(id);
     return ResponseEntity.status(HttpStatus.OK).build();
   }
