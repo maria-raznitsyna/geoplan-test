@@ -1,5 +1,6 @@
 package net.springbootdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Address {
   Integer officeNumber;
 
   @OneToOne(mappedBy = "address")
+  @JsonIgnore
   private Client client;
 
 }
