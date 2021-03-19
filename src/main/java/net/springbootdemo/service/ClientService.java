@@ -1,6 +1,7 @@
 package net.springbootdemo.service;
 
 import net.springbootdemo.dto.ClientDto;
+import net.springbootdemo.model.Address;
 import net.springbootdemo.model.Client;
 import net.springbootdemo.repository.ClientRepository;
 import net.springbootdemo.repository.OrderRepository;
@@ -9,37 +10,35 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import static net.springbootdemo.exception.ObjectNotFoundException.objectNotFoundExSupplier;
 
 @Service
 public class ClientService {
 
-  private final ClientRepository clientRepository;
-  private final OrderRepository orderRepository;
+    private final ClientRepository clientRepository;
+    private final OrderRepository orderRepository;
 
-  public ClientService(ClientRepository clientRepository, OrderRepository orderRepository) {
-    this.clientRepository = clientRepository;
-    this.orderRepository = orderRepository;
-  }
+    public ClientService(ClientRepository clientRepository, OrderRepository orderRepository) {
+        this.clientRepository = clientRepository;
+        this.orderRepository = orderRepository;
+    }
 
-  public Client findById(Long id) {
-    return clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
-  }
+    public Client findById(Long id) {
+        return clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
+    }
 
-  public List<Client> findAll() {
-    return clientRepository.findAll();
-  }
+    public List<Client> findAll() {
+        return clientRepository.findAll();
+    }
 
-  public Client saveClient(Client client) {
-    return clientRepository.save(client);
-  }
+    public Client saveClient(Client client) {
+        return clientRepository.save(client);
+    }
 
   public Client updateClient(Long id, ClientDto updateDto) {
-    Optional<Client> dbVersion = clientRepository.findById(id);
-    if (dbVersion.isPresent()) {
-      Client clientFromDb = dbVersion.get();
+    Client clientFromDb = clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
+
       if (Objects.nonNull(updateDto.getAddress())) {
         clientFromDb.setAddress(updateDto.getAddress());
       }
@@ -57,13 +56,11 @@ public class ClientService {
       }
       return clientRepository.save(clientFromDb);
     }
-    return null;
-  }
 
-  @Transactional
-  public void deleteByIdWithAllOrders(Long id) {
-    Client client = clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
-    orderRepository.deleteAllByClient(client);
-    clientRepository.deleteById(id);
-  }
+    @Transactional
+    public void deleteByIdWithAllOrders(Long id) {
+        Client client = clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
+        orderRepository.deleteAllByClient(client);
+        clientRepository.deleteById(id);
+    }
 }

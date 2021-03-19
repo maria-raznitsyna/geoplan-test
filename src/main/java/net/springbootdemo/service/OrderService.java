@@ -58,6 +58,7 @@ public class OrderService {
   }
 
   public void deleteById(Long id) {
+    orderRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Order.class, id));
     orderRepository.deleteById(id);
   }
 }
