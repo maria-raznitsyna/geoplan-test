@@ -10,9 +10,9 @@ import net.springbootdemo.model.Address;
 @EqualsAndHashCode(of = {"id"})
 @ToString
 public class ClientDto {
-  private Long id;
-  private String name;
-  private String inn;
-  private String phoneNumber;
-  private Address address;
+    private Long id;
+    private String name;
+    private String inn;
+    private String phoneNumber;
+    private Address address;
 }

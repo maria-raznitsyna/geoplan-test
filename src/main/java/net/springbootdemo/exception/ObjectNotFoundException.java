@@ -2,9 +2,7 @@ package net.springbootdemo.exception;
 
 import java.util.function.Supplier;
 
-/**
- * @author val.rudi
- */
+
 public class ObjectNotFoundException extends BaseException {
 
     public ObjectNotFoundException(String entityName, Object identity) {

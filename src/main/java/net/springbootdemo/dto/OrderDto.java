@@ -9,8 +9,8 @@ import lombok.*;
 @EqualsAndHashCode(of = {"id"})
 @ToString
 public class OrderDto {
-  private Long id;
-  private Long number;
-  private String description;
-  private Float sum;
+    private Long id;
+    private Long number;
+    private String description;
+    private Float sum;
 }

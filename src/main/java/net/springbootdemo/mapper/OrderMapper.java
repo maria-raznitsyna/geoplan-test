@@ -5,9 +5,6 @@ import net.springbootdemo.model.Order;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-/**
- * @author val.rudi
- */
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
         collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED,

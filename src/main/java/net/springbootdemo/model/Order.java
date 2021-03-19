@@ -16,24 +16,24 @@ import java.util.Date;
 @Entity
 @Table(name = "orders")
 public class Order {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "number")
-  private Long number;
+    @Column(name = "number")
+    private Long number;
 
-  @CreationTimestamp
-  @Column(name = "creation_dt",  updatable = false)
-  private Date creationDate;
+    @CreationTimestamp
+    @Column(name = "creation_dt", updatable = false)
+    private Date creationDate;
 
-  @Column(name = "description")
-  private String description;
+    @Column(name = "description")
+    private String description;
 
-  @Column(name = "sum")
-  private Float sum;
+    @Column(name = "sum")
+    private Float sum;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "order_owner", nullable = false)
-  private Client client;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_owner", nullable = false)
+    private Client client;
 }

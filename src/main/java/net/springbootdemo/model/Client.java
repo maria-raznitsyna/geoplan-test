@@ -14,21 +14,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "clients")
 public class Client {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "name")
+    private String name;
 
-  @Column(name = "inn")
-  private String inn;
+    @Column(name = "inn")
+    private String inn;
 
-  @Column(name = "phone")
-  private String phoneNumber;
+    @Column(name = "phone")
+    private String phoneNumber;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "address_id", referencedColumnName = "id")
-  private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 }
 

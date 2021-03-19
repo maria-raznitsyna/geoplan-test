@@ -15,19 +15,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "address")
 public class Address {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  String codeRegion;
-  String district;
-  String city;
-  String street;
-  Integer houseNumber;
-  Integer corpsNumber;
-  Integer officeNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    String codeRegion;
+    String district;
+    String city;
+    String street;
+    Integer houseNumber;
+    Integer corpsNumber;
+    Integer officeNumber;
 
-  @OneToOne(mappedBy = "address")
-  @JsonIgnore
-  private Client client;
+    @OneToOne(mappedBy = "address")
+    @JsonIgnore
+    private Client client;
 
 }

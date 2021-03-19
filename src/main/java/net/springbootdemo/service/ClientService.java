@@ -1,7 +1,6 @@
 package net.springbootdemo.service;
 
 import net.springbootdemo.dto.ClientDto;
-import net.springbootdemo.model.Address;
 import net.springbootdemo.model.Client;
 import net.springbootdemo.repository.ClientRepository;
 import net.springbootdemo.repository.OrderRepository;
@@ -36,25 +35,25 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-  public Client updateClient(Long id, ClientDto updateDto) {
-    Client clientFromDb = clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
+    public Client updateClient(Long id, ClientDto updateDto) {
+        Client clientFromDb = clientRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Client.class, id));
 
-      if (Objects.nonNull(updateDto.getAddress())) {
-        clientFromDb.setAddress(updateDto.getAddress());
-      }
-      if (Objects.nonNull(updateDto.getInn())) {
-        clientFromDb.setInn(updateDto.getInn());
-      }
-      if (Objects.nonNull(updateDto.getName())) {
-        clientFromDb.setName(updateDto.getName());
-      }
-      if (Objects.nonNull(updateDto.getPhoneNumber())) {
-        clientFromDb.setPhoneNumber(updateDto.getPhoneNumber());
-      }
-      if (Objects.nonNull(updateDto.getAddress())) {
-        clientFromDb.setAddress(updateDto.getAddress());
-      }
-      return clientRepository.save(clientFromDb);
+        if (Objects.nonNull(updateDto.getAddress())) {
+            clientFromDb.setAddress(updateDto.getAddress());
+        }
+        if (Objects.nonNull(updateDto.getInn())) {
+            clientFromDb.setInn(updateDto.getInn());
+        }
+        if (Objects.nonNull(updateDto.getName())) {
+            clientFromDb.setName(updateDto.getName());
+        }
+        if (Objects.nonNull(updateDto.getPhoneNumber())) {
+            clientFromDb.setPhoneNumber(updateDto.getPhoneNumber());
+        }
+        if (Objects.nonNull(updateDto.getAddress())) {
+            clientFromDb.setAddress(updateDto.getAddress());
+        }
+        return clientRepository.save(clientFromDb);
     }
 
     @Transactional

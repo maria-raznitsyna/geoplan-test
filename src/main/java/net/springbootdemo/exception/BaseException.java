@@ -1,10 +1,6 @@
 package net.springbootdemo.exception;
 
-/**
- * Base exception
- *
- * @author val.rudi
- */
+
 public class BaseException extends RuntimeException {
     private int errorCode;
 
