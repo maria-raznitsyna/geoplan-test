@@ -25,7 +25,7 @@ public class Address {
   Integer corpsNumber;
   Integer officeNumber;
 
-  @OneToOne(fetch = FetchType.EAGER)
-  Client client;
+  @OneToOne(mappedBy = "address")
+  private Client client;
 
 }

@@ -27,7 +27,8 @@ public class Client {
   @Column(name = "phone")
   private String phoneNumber;
 
-  @OneToOne(fetch = FetchType.EAGER)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "address_id", referencedColumnName = "id")
   private Address address;
 }
 
