@@ -8,6 +8,7 @@ import net.springbootdemo.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 import static net.springbootdemo.exception.ObjectNotFoundException.objectNotFoundExSupplier;
 
@@ -44,7 +45,15 @@ public class OrderService {
 
   public Order updateOrder(Long id, OrderDto updateDto) {
     Order dbVersion = orderRepository.findById(id).orElseThrow(objectNotFoundExSupplier(Order.class, id));
-
+    if(Objects.nonNull(updateDto.getDescription())) {
+      dbVersion.setDescription(updateDto.getDescription());
+    }
+    if (Objects.nonNull(updateDto.getNumber())) {
+      dbVersion.setNumber(updateDto.getNumber());
+    }
+    if (Objects.nonNull(updateDto.getSum())) {
+      dbVersion.setSum(updateDto.getSum());
+    }
       return orderRepository.save(dbVersion);
   }
 
